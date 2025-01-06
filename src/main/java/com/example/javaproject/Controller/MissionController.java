@@ -25,6 +25,7 @@ public class MissionController {
     }
 
     @GetMapping("/missions")
+    @ResponseBody
     public List<Mission> getAllMissions() {
         return missionService.getAllMissions();
     }
