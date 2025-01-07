@@ -22,33 +22,8 @@ public class MissionService {
         missionRepository.save(mission);
     }
 
-    public List<MissionWithUserName> getAllMissions() {
-        List<Mission> missions = missionRepository.findAll();
-        List<MissionWithUserName> missionsWithUserName = new ArrayList<>();
-
-        for (Mission mission : missions) {
-            Users user = usersRepository.findById(mission.getUserId())
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-            String userName = user.getUsername();
-
-            MissionWithUserName missionWithUserName = new MissionWithUserName(
-                    mission.getId(),
-                    mission.getUserId(),
-                    mission.getTitle(),
-                    mission.getDescription(),
-                    mission.getDeadline(),
-                    mission.getLevel(),
-                    mission.getMaxParticipants(),
-                    mission.getReward(),
-                    mission.getCategories(),
-                    mission.getRules(),
-                    userName
-            );
-
-            missionsWithUserName.add(missionWithUserName);
-        }
-
-        return missionsWithUserName;
+    public List<Mission> getAllMissions() {
+        return missionRepository.findAll();
     }
 
     public Optional<Mission> getMissionById(Integer id) {

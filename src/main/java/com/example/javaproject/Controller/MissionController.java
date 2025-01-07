@@ -29,7 +29,7 @@ public class MissionController {
 
     @GetMapping("/missions")
     @ResponseBody
-    public List<MissionWithUserName> getAllMissions() {
+    public List<Mission> getAllMissions() {
         return missionService.getAllMissions();
     }
 }
