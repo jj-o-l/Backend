@@ -1,5 +1,6 @@
 package com.example.javaproject;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,7 +46,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/**").permitAll() // 모든 요청 허용 (테스트용)
                 )
-                .logout(logout -> logout.logoutUrl("/logout").permitAll()); // 로그아웃 설정
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // 로그아웃 엔드포인트 설정
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            // 로그아웃 성공 시 JSON 응답
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"message\": \"Logout successful\"}");
+                            response.getWriter().flush();
+                        })
+                        .deleteCookies("auth_token") // auth_token 쿠키 삭제
+                        .permitAll() // 모든 사용자에게 허용
+                );
         return http.build();
     }
 }
