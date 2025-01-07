@@ -60,7 +60,7 @@
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(List.of("https://677c1aaff2c08b00b55f1230--jjol.netlify.app")); // 허용된 Origin 설정
+            configuration.setAllowedOrigins(List.of("https://jjol.netlify.app")); // 허용된 Origin 설정
             configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용된 HTTP 메서드
             configuration.setAllowedHeaders(List.of("*")); // 허용된 헤더
             configuration.setAllowCredentials(true); // 쿠키를 포함한 인증 정보 허용

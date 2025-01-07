@@ -12,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://677c1aaff2c08b00b55f1230--jjol.netlify.app", allowCredentials = "true")
+@CrossOrigin(origins = "https://jjol.netlify.app", allowCredentials = "true")
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
@@ -32,7 +32,7 @@ public class LoginController {
                     .sameSite("None")     // 로컬 환경에서는 Lax 사용
                     .secure(true)       // HTTP 환경이므로 secure=false
                     .path("/")           // 전체 경로에서 유효
-                    .domain("localhost")
+                    .domain("jjol.netlify.app")
                     .maxAge(3600)        // 쿠키 만료 시간 (1시간)
                     .build();
 
