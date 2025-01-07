@@ -27,6 +27,7 @@ public class MissionService {
         mission.setTitle((String) requestData.get("title"));
         mission.setDescription((String) requestData.get("description"));
         mission.setDeadline((String) requestData.get("deadline"));
+        mission.setLevel((Integer) requestData.get("level"));
         mission.setMaxParticipants((Integer) requestData.get("maxParticipants"));
         mission.setReward((String) requestData.get("reward"));
 
