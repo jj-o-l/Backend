@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@CrossOrigin(origins = "https://jjol.netlify.app")
 @RequiredArgsConstructor
 public class MissionController {
     private final MissionService missionService;

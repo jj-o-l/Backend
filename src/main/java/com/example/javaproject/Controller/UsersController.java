@@ -19,6 +19,7 @@ import javax.crypto.SecretKey;
 import java.util.Base64;
 
 @Controller
+@CrossOrigin(origins = "https://jjol.netlify.app")
 @RequiredArgsConstructor
 public class UsersController {
 

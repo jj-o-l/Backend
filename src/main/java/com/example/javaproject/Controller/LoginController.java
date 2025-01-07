@@ -22,6 +22,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Controller
+@CrossOrigin(origins = "https://jjol.netlify.app")
 @RequiredArgsConstructor
 public class LoginController {
 

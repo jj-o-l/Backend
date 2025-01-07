@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@CrossOrigin(origins = "https://jjol.netlify.app")
 @RequiredArgsConstructor
 public class ChallengeController {
     private final ChallengeService challengeService;
