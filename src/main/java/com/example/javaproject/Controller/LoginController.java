@@ -60,7 +60,6 @@ public class LoginController {
 //                    .sameSite("Lax")
 //                    .secure(false)
                     .path("/")           // 전체 경로에서 유효
-                    .domain("jjol.netlify.app") // 배포된 도메인
                     .maxAge(3600)        // 쿠키 만료 시간 (1시간)
                     .build();
 
