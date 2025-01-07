@@ -54,12 +54,12 @@ public class LoginController {
             // 쿠키에 JWT 토큰 설정
             ResponseCookie cookie = ResponseCookie.from("auth_token", jwtToken)
                     .httpOnly(true)      // JavaScript에서 접근 불가
-//                    .sameSite("None")     // 배포 환경에서는 None 사용
-//                    .secure(true)         // HTTPS 환경에서는 secure=true
-                    .sameSite("Lax")
-                    .secure(false)
+                    .sameSite("None")     // 배포 환경에서는 None 사용
+                    .secure(true)         // HTTPS 환경에서는 secure=true
+//                    .sameSite("Lax")
+//                    .secure(false)
                     .path("/")           // 전체 경로에서 유효
-//                    .domain("jjol.netlify.app") // 배포된 도메인
+                    .domain("jjol.netlify.app") // 배포된 도메인
                     .maxAge(3600)        // 쿠키 만료 시간 (1시간)
                     .build();
 
