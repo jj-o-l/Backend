@@ -42,19 +42,25 @@ public class UsersController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<?> getUserInfo() {
+    public ResponseEntity<?> getUserInfo(@CookieValue(value = "auth_token", defaultValue = "") String authToken) {
+        if (authToken.isEmpty()) {
+            return ResponseEntity.status(401).body("로그인 정보가 없습니다.");
+        }
+
         try {
-            // 유저 정보 조회 (토큰 없이 직접적으로 처리)
-            UserInfoDto userInfo = usersService.getUserInfoByUsername("defaultUsername");  // 예시로 "defaultUsername" 사용, 실제로는 로그인한 사용자나 다른 방식으로 처리해야 할 수 있음
+            // JWT 토큰을 사용해 유저 정보 조회
+            String username = getUsernameFromJwt(authToken);
+            // 서비스에서 유저 정보를 조회
+            UserInfoDto userInfo = usersService.getUserInfoByUsername(username);
 
             if (userInfo != null) {
                 return ResponseEntity.ok(userInfo);
             } else {
-                return ResponseEntity.status(404).body("유저 정보를 찾을 수 없습니다.");
+                return ResponseEntity.status(401).body("유효하지 않은 인증 토큰입니다.");
             }
 
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("서버 오류: " + e.getMessage());
+            return ResponseEntity.status(401).body("토큰 검증 실패: " + e.getMessage());
         }
     }
 
