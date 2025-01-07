@@ -12,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "https://677c1aaff2c08b00b55f1230--jjol.netlify.app", allowCredentials = "true")
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
@@ -29,13 +29,12 @@ public class LoginController {
 
             ResponseCookie cookie = ResponseCookie.from("auth_token", "someAuthTokenHere")
                     .httpOnly(true)      // JavaScript에서 접근 불가
-                    .sameSite("Lax")     // 로컬 환경에서는 Lax 사용
-                    .secure(false)       // HTTP 환경이므로 secure=false
+                    .sameSite("None")     // 로컬 환경에서는 Lax 사용
+                    .secure(true)       // HTTP 환경이므로 secure=false
                     .path("/")           // 전체 경로에서 유효
+                    .domain("localhost")
                     .maxAge(3600)        // 쿠키 만료 시간 (1시간)
                     .build();
-
-
 
             // 쿠키를 응답 헤더에 추가
             return ResponseEntity.ok()
