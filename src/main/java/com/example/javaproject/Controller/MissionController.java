@@ -1,5 +1,6 @@
 package com.example.javaproject.Controller;
 
+import com.example.javaproject.DTO.MissionWithUserName;
 import com.example.javaproject.Service.MissionService;
 import com.example.javaproject.Table.Mission;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +15,13 @@ public class MissionController {
     private final MissionService missionService;
 
     @PostMapping("/mission/create")
+    @ResponseBody
     public void createMission(@RequestBody Mission mission) {
         missionService.createMission(mission);
     }
 
     @GetMapping("/mission/{id}")
+    @ResponseBody
     public Mission getMissionById(@PathVariable Integer id) {
         return missionService.getMissionById(id)
                 .orElseThrow(() -> new RuntimeException("미션이 없음 id: " + id));
@@ -26,7 +29,7 @@ public class MissionController {
 
     @GetMapping("/missions")
     @ResponseBody
-    public List<Mission> getAllMissions() {
+    public List<MissionWithUserName> getAllMissions() {
         return missionService.getAllMissions();
     }
 }
