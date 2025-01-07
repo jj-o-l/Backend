@@ -2,6 +2,7 @@ package com.example.javaproject.Service;
 
 import com.example.javaproject.Repository.ChallengeRepository;
 import com.example.javaproject.Table.Challenge;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,12 @@ public class ChallengeService {
         challenge.setUserId((Integer) requestData.get("userId"));
         challenge.setMissionId((Integer) requestData.get("missionId"));
         challenge.setTitle((String) requestData.get("title"));
-        challenge.setCheckboxes((List<String>) requestData.get("checkboxes"));
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<String> checkboxes = objectMapper.convertValue(
+                requestData.get("checkboxes"),
+                objectMapper.getTypeFactory().constructCollectionType(List.class, String.class)
+        );
+        challenge.setCheckboxes(checkboxes);
         challenge.setSuccess(0);
         challenge.setFailed(0);
         challengeRepository.save(challenge);

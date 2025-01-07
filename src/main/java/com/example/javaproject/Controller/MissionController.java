@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @CrossOrigin(origins = "https://jjol.netlify.app")
@@ -17,8 +18,8 @@ public class MissionController {
 
     @PostMapping("/mission/create")
     @ResponseBody
-    public void createMission(@RequestBody Mission mission) {
-        missionService.createMission(mission);
+    public void createMission(@RequestBody Map<String, Object> requestData) {
+        missionService.createMission(requestData);
     }
 
     @GetMapping("/mission/{id}")
